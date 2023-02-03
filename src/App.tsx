@@ -49,7 +49,7 @@ function App() {
   const onSubmit = async (data: UserSubmitForm) => {
     await wait(3000);
     
-    console.log(JSON.stringify(data, null, 2));    
+    console.log(JSON.stringify(data, null, 2));
   }
 
   return (
@@ -140,9 +140,8 @@ function App() {
             </button>
           </div>
           
-          {isSubmitting && <div className="form__loader"><span className="srt">loading</span></div>}
-            
-        </form> : 'verstuurd'
+          {isSubmitting && <div className="form__loader"><span className="loader"></span></div>}
+        </form> : <p>verstuurd</p>
       }
     </>
   );

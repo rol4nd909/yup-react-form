@@ -1,9 +1,7 @@
 .form {
   display: grid;
   gap: 1.5rem;
-  width: min(calc(100% - 2rem), 40rem);
-  padding-inline: 1rem;
-  margin-inline: auto;
+  padding: 1rem;
 }
 
 .form__group {
@@ -16,10 +14,42 @@
   padding-inline: 1rem;
 }
 
+.form__loader {
+  position: fixed;
+  inset: 0;
+  background-color: var(--overlay);
+  display: grid;
+  place-items: center;
+  z-index: 10;
+}
+
 .is-invalid > .form__input {
   border: 1px solid var(--alert);
 }
 
 .is-invalid > .form__feedback {
   color: var(--alert);
+}
+
+.loader {
+  display: grid;
+  width: 3rem; /* the size */
+  padding: .5rem; /* the border thickness */
+  background: var(--accent);
+  
+  aspect-ratio: 1;
+  border-radius: 50%;
+  --_m: 
+    conic-gradient(hsl(0deg 0% 0% / 0%),hsl(0deg 0% 0%)),
+    linear-gradient(hsl(0deg 0% 0%) 0 0) content-box;
+  -webkit-mask: var(--_m);
+          mask: var(--_m);
+  -webkit-mask-composite: source-out;
+          mask-composite: subtract;
+  box-sizing: border-box;
+  animation: load 1s linear infinite;
+}
+
+@keyframes load {
+  to{transform: rotate(1turn)}
 }
