@@ -2,12 +2,17 @@
   --accent-dark: hsl(330deg 100% 71%);
   --accent-light: hsl(328deg 100% 54%);
 
+  --alert-dark: hsl(0deg 100% 27%);
+  --alert-light: hsl(0deg 100% 50%);
+
   --accent: var(--accent-dark);
+  --alert: var(--alert-dark)
 }
 
 @media (prefers-color-scheme: light) {
   :root {
     --accent: var(--accent-light);
+    --alert: var(--alert-light);
   }
 }
 
@@ -15,6 +20,7 @@ html {
   box-sizing: border-box;
   accent-color: var(--accent);
 
+  color-scheme: dark light;
 }
 
 *,:after,:before {
@@ -52,4 +58,13 @@ body {
 .form__input {
   padding-block: 1rem;
   padding-inline: 1rem;
+}
+
+.is-invalid > .form__input {
+  border: 1px solid var(--alert);
+}
+
+.is-invalid > label,
+.is-invalid > .form__feedback {
+  color: var(--alert);
 }
