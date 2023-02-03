@@ -15,7 +15,6 @@ html {
   box-sizing: border-box;
   accent-color: var(--accent);
 
-  color-scheme: dark light;
 }
 
 *,:after,:before {
