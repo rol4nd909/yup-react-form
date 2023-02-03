@@ -1,4 +1,4 @@
-import React from 'react';
+// import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -40,7 +40,7 @@ function App() {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting, isSubmitted }
+    formState: { errors, isSubmitting }
   } = useForm<UserSubmitForm>({
     mode: 'onChange',
     resolver: yupResolver(validationSchema)
@@ -53,97 +53,93 @@ function App() {
   }
 
   return (
-    <>
-      {!isSubmitted ?
-        <form onSubmit={handleSubmit(onSubmit)} className="form">
+    <form onSubmit={handleSubmit(onSubmit)} className="form">
 
-          <div className={`form__group ${errors.fullname ? 'is-invalid' : ''}`}>
-            <label htmlFor="fullname">Full Name</label>
-            <input 
-              type="text" 
-              {...register('fullname')} 
-              className={`form__input ${errors.fullname ? 'is-invalid' : ''}`} 
-              id="fullname" />
+      <div className={`form__group ${errors.fullname ? 'is-invalid' : ''}`}>
+        <label htmlFor="fullname">Full Name</label>
+        <input 
+          type="text" 
+          {...register('fullname')} 
+          className={`form__input ${errors.fullname ? 'is-invalid' : ''}`} 
+          id="fullname" />
 
-            <div className="form__feedback">{errors.fullname?.message}</div>
-          </div>
+        <div className="form__feedback">{errors.fullname?.message}</div>
+      </div>
 
-          <div className={`form__group ${errors.username ? 'is-invalid' : ''}`}>
-            <label htmlFor="username">User Name</label>
-            <input 
-              type="text" 
-              {...register('username')} 
-              className={`form__input ${errors.username ? 'is-invalid' : ''}`} 
-              autoComplete="username"
-              id="username" />
+      <div className={`form__group ${errors.username ? 'is-invalid' : ''}`}>
+        <label htmlFor="username">User Name</label>
+        <input 
+          type="text" 
+          {...register('username')} 
+          className={`form__input ${errors.username ? 'is-invalid' : ''}`} 
+          autoComplete="username"
+          id="username" />
 
-            <div className="form__feedback">{errors.username?.message}</div>
-          </div>
+        <div className="form__feedback">{errors.username?.message}</div>
+      </div>
 
-          <div className={`form__group ${errors.email ? 'is-invalid' : ''}`}>
-            <label htmlFor="email">Email</label>
-            <input 
-              type="email" 
-              {...register('email')} 
-              className={`form__input ${errors.email ? 'is-invalid' : ''}`} 
-              id="email" />
+      <div className={`form__group ${errors.email ? 'is-invalid' : ''}`}>
+        <label htmlFor="email">Email</label>
+        <input 
+          type="email" 
+          {...register('email')} 
+          className={`form__input ${errors.email ? 'is-invalid' : ''}`} 
+          id="email" />
 
-            <div className="form__feedback">{errors.email?.message}</div>
-          </div>
+        <div className="form__feedback">{errors.email?.message}</div>
+      </div>
 
-          <div className={`form__group ${errors.password ? 'is-invalid' : ''}`}>
-            <label htmlFor="password">Password</label>
-            <input 
-              type="password"
-              {...register('password')} 
-              className={`form__input ${errors.password ? 'is-invalid' : ''}`} 
-              autoComplete="new-password"
-              id="password" />
+      <div className={`form__group ${errors.password ? 'is-invalid' : ''}`}>
+        <label htmlFor="password">Password</label>
+        <input 
+          type="password"
+          {...register('password')} 
+          className={`form__input ${errors.password ? 'is-invalid' : ''}`} 
+          autoComplete="new-password"
+          id="password" />
 
-            <div className="form__feedback">{errors.password?.message}</div>
-          </div>
+        <div className="form__feedback">{errors.password?.message}</div>
+      </div>
 
-          <div className={`form__group ${errors.confirmPassword ? 'is-invalid' : ''}`}>
-            <label htmlFor="confirmPassword">Confirm Password</label>
-            <input 
-              type="password"
-              {...register('confirmPassword')} 
-              className={`form__input ${errors.confirmPassword ? 'is-invalid' : ''}`} 
-              autoComplete="new-password"
-              id="confirmPassword" />
+      <div className={`form__group ${errors.confirmPassword ? 'is-invalid' : ''}`}>
+        <label htmlFor="confirmPassword">Confirm Password</label>
+        <input 
+          type="password"
+          {...register('confirmPassword')} 
+          className={`form__input ${errors.confirmPassword ? 'is-invalid' : ''}`} 
+          autoComplete="new-password"
+          id="confirmPassword" />
 
-            <div className="form__feedback">{errors.confirmPassword?.message}</div>
-          </div>
+        <div className="form__feedback">{errors.confirmPassword?.message}</div>
+      </div>
 
-          <div className={`form__group ${errors.acceptTerms ? 'is-invalid' : ''}`}>
-            <input 
-              type="checkbox"
-              {...register('acceptTerms')} 
-              id="acceptTerms" />
-            <label htmlFor="acceptTerms" className='form__label'>
-              I have read and agree to the Terms
-            </label>
+      <div className={`form__group form__group--check ${errors.acceptTerms ? 'is-invalid' : ''}`}>
+        <input 
+          type="checkbox"
+          {...register('acceptTerms')} 
+          id="acceptTerms" />
+        <label htmlFor="acceptTerms" className='form__label'>
+          I have read and agree to the Terms
+        </label>
 
-            <div className="form__feedback">{errors.acceptTerms?.message}</div>
-          </div>
+        <div className="form__feedback">{errors.acceptTerms?.message}</div>
+      </div>
 
-          <div className="form__group">
-            <button className="btn  btn-primary" type="submit">
-              Register
-            </button>
-            <button
-              type="button"
-              onClick={() => reset()}
-              className="btn  btn-warning"
-            >
-              Reset
-            </button>
-          </div>
-          
-          {isSubmitting && <div className="form__loader"><span className="loader"></span></div>}
-        </form> : <p>verstuurd</p>
-      }
-    </>
+      <div className="form__group form__group--action">
+        <button className="btn  btn-primary" type="submit">
+          Register
+        </button>
+        <button
+          type="button"
+          onClick={() => reset()}
+          className="btn  btn-warning"
+        >
+          Reset
+        </button>
+      </div>
+      
+      {isSubmitting && <div className="form__loader"><span className="loader"></span></div>}
+    </form>
   );
 }
 
